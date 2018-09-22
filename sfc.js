@@ -15,7 +15,7 @@
     function init () {
         console.log('init SF');
         initEvents ();
-        
+        initStyle ();
     }
 
     function initEvents () {
@@ -38,7 +38,7 @@
     
     /* GUI */
     
-    $('body').append ("<div id='sfcontainer' style='display: none;'><div id='sf' style='display: block; position: absolute;left: 50%;margin: 0px 0px 0px -20px;bottom: 0px;width: 30px;height: 10px;padding: 5px;background: rgba(0, 247, 0, 0.5);border-radius: 5px 5px 0 0;text-align: center;color: #EEE;font-size: 10px;cursor: pointer;'>SF</div></div>");
+    $('body').append ("<div id='sfcontainer'><div id='sf' style='display: block; position: absolute;left: 50%;margin: 0px 0px 0px -20px;bottom: 0px;width: 30px;height: 10px;padding: 5px;background: rgba(0, 247, 0, 0.5);border-radius: 5px 5px 0 0;text-align: center;color: #EEE;font-size: 10px;cursor: pointer;'>SF</div></div>");
 
     $("#sf").click(function (){
         console.log("SF clicked");
@@ -58,31 +58,31 @@
         $('#selectaircraft-1').click(function (){
             config.scalingFactor = osf;
             SWAM.ZoomTo(osf);
-            $("#sfcontainer").css({display: "none"});
+            //$("#sfcontainer").css({display: "none"});
 
         }); 
         $('#selectaircraft-2').click(function (){
             config.scalingFactor = osf;
             SWAM.ZoomTo(osf);
-            $("#sfcontainer").css({display: "none"});
+            //$("#sfcontainer").css({display: "none"});
 
         });     
         $('#selectaircraft-3').click(function (){
             config.scalingFactor = osf;
             SWAM.ZoomTo(osf);
-            $("#sfcontainer").css({display: "none"});
+            //$("#sfcontainer").css({display: "none"});
 
         });
         $('#selectaircraft-4').click(function (){
             config.scalingFactor = osf;
             SWAM.ZoomTo(osf);
-            $("#sfcontainer").css({display: "none"});
+            //$("#sfcontainer").css({display: "none"});
 
         });
         $('#selectaircraft-5').click(function (){
             config.scalingFactor = osf;
             SWAM.ZoomTo(osf);
-            $("#sfcontainer").css({display: "none"});
+            //$("#sfcontainer").css({display: "none"});
 
         }); 
 
@@ -95,7 +95,7 @@
             respawnedid = data['id'];
             if (respawnedid == Players.getMe().id){
                 console.log("player respawned, hide Sf");
-                $("#sfcontainer").css({display: "none"});
+                //$("#sfcontainer").css({display: "none"});
                 config.scalingFactor = osf;
             }
     });
@@ -103,22 +103,13 @@
     SWAM.on ( 'gamePrep', function (){
         window.osf = config.scalingFactor;
         console.log("gameprep osf =" + osf);
-        $("#sfcontainer").css({display: "none"});
+        //$("#sfcontainer").css({display: "none"});
     });
     
     
     
     function onKeydown ( event ) {
         
-        if ( event.originalEvent.key === 'v' ) { 
-
-            event.stopImmediatePropagation ();
-   
-            checkspecdelay = 2000;
-            checkspec(checkspecdelay)
-               
-            
-        }
          if ( event.originalEvent.key === 'u' ) { 
 
             event.stopImmediatePropagation ();
@@ -141,19 +132,17 @@
         
     }
     
-    function onMatchStarted () {
-        checkspecdelay = 10000;
-        checkspec(checkspecdelay)
-    }
     
-    function checkspec(checkspecdelay){
-        window.setTimeout(function () {
-                    if( $('#btnFreeSpectator').css('display') == 'block' ) {
-                        console.log("v key pressed, show sf");
-                        $("#sfcontainer").css({display: "block"});
-                        
-                    }
-                },checkspecdelay); 
+    function initStyle () {
+
+        const style = `
+            #sfcontainer {display: "none"}
+            .spectatorMode > #sfcontainer {display: "block"}
+        
+        `
+        
+        $('body').append ( style );
+        
     }
 
     /* API */
@@ -184,7 +173,8 @@
         id: 'SFC',
         description: '',
         version: '1.0.0',
-        author: 'xplay'
+        author: 'xplay',
+        settingsProvider: initSettings ()
     });
     
 }();
