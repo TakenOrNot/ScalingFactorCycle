@@ -20,7 +20,7 @@
 
     function initEvents () {
         SWAM.on ( 'keydown', onKeydown );
-        SWAM.on ( 'CTF_MatchStarted', onMatchStarted );
+        //SWAM.on ( 'CTF_MatchStarted', onMatchStarted );
     }
     
     function initSettings () {
