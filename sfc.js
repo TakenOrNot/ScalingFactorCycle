@@ -137,8 +137,8 @@
 
         const style = `
             <style id='sfcStyle'>
-            #sfcontainer {display: "none"}
-            .spectatorMode > #sfcontainer {display: "block"}
+                #sfcontainer {display: none;}
+                .spectatorMode > #sfcontainer {display: block;}
             </style>
         `
         
